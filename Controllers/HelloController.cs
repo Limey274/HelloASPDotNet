@@ -7,17 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HelloASPDotNet.Controllers
 {
-    [Route("/helloworld")]
+   
     public class HelloController : Controller
     {
-        [HttpGet]
-        public IActionResult Index()
+        //GET: /hello
+               public IActionResult Index()
         {
-            string html = "<form method='post' action='/helloworld/welcome'>" +
-        "<input type='text' name='name'/>" +
-        "<label for= 'language'> Choose a Language:</label >" +
-            "<select name = 'language' id = 'language'> " +
-                "<option value = 'English'> English </option>" +
+                 string html = "<form method='post' action='/helloworld>" +
+                            "<input type='text' name='name'/>" +
+                             "<label= 'lang'> Choose a Language:</label >" +
+                             "<select name = 'language'> " +
+                 "<option value = 'English'> English </option>" +
                 "<option value = 'Spanish'> Spanish </option>" +
                 "<option value = 'French'> French </option>" +
                 "<option value = 'German'> German </option>" +
@@ -28,21 +28,22 @@ namespace HelloASPDotNet.Controllers
                 "</form>";
  
 
-            return Content(html, "text/html");
+                return Content(html, "text/html");
         }
 
         // GET: /<controller>/welcome
         
-        [HttpPost("welcome")]
-        //[HttpGet("/welcome{name?}")]
-        public IActionResult Welcome(string name = "World", string value = "English")
+        [HttpPost("/hello")]
+        
+        public IActionResult Welcome(string name = "World", string language = "English")
         {
-            string message = CreateMessage(value);
-            return Content(" <h1>" + message + name + "!</h1>", "text/html ");
+            
+            return Content(CreateMessage(name, language), "text/html");
         }
 
-        public static string CreateMessage(string language)
+        public static string CreateMessage(string name, string language)
         {
+            
             if (language == "English")
             {
                 return "Hello ";
@@ -70,11 +71,11 @@ namespace HelloASPDotNet.Controllers
             else 
             {
                 return "What was that?";
-            };        
-        
-        
+            };
+
+            //return greeting + name;
         
         }
-
+           
     }
 }
